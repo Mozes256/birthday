@@ -1,19 +1,23 @@
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerText = "❤️";
+$(document).ready(function () {
+  function createHeart() {
+    const size = Math.floor(Math.random() * 20) + 10;
+    const left = Math.random() * 100;
 
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // between 2–5 seconds
-  heart.style.fontSize = Math.random() * 20 + 10 + "px"; // 10px – 30px
+    const $heart = $('<div class="heart">❤️</div>').css({
+      position: 'absolute',
+      left: `${left}vw`,
+      fontSize: `${size}px`,
+      animationDuration: `${Math.random() * 3 + 2}s`,
+      opacity: 0.8,
+    });
 
-  document.getElementById("hearts-container").appendChild(heart);
+    $('#hearts-container').append($heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
-}
+    setTimeout(() => {
+      $heart.remove();
+    }, 5000);
+  }
 
-// Start hearts falling when page loads
-setInterval(createHeart, 300);
-s
+  // Start generating hearts every 300ms
+  setInterval(createHeart, 300);
+});
